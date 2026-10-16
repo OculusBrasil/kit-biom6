@@ -178,18 +178,70 @@ footer .wrap{display:grid;gap:10px}
 @media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important}}
 html{scroll-behavior:smooth}
 section{scroll-margin-top:56px}
+
+/* ---------- celular ---------- */
+.tabbar,.sheet,.sheet-bg{display:none}
+@media (max-width:700px){
+  body{font-size:15.5px;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+  nav.toc{display:none}
+  section{padding-block:30px;scroll-margin-top:calc(12px + env(safe-area-inset-top,0px))}
+  h2{font-size:1.45rem}
+  .hero .wrap{padding-block:24px 22px;gap:14px}
+  .hero p.lead{font-size:.95rem}
+  .fact{padding:10px 12px}
+  .fact strong{font-size:1.2rem}
+  .pitch{padding:16px}
+  .pitch blockquote{font-size:1rem}
+
+  /* tabelas viram cartões */
+  .tbl{overflow:visible;border:none;background:none;border-radius:0}
+  .tbl table{min-width:0;font-size:.93rem}
+  .tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .tbl tbody{display:grid;gap:10px}
+  .tbl tr{display:grid;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .tbl tr.hl{border-color:var(--blue)}
+  .tbl td{display:grid;grid-template-columns:7.2rem minmax(0,1fr);gap:10px;align-items:baseline;padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:normal}
+  .tbl td.num{text-align:left;white-space:normal}
+  .tbl td>.pill,.tbl td>strong{justify-self:start}
+  .tbl td::before{content:attr(data-label);font-size:.76rem;font-weight:600;letter-spacing:.02em;color:var(--muted)}
+  .tbl td:first-child{display:block;font-family:var(--display);font-weight:600;font-size:1.05rem;background:var(--surface-2)}
+  .tbl td:first-child::before{content:none}
+  .tbl tr:last-child td{border-bottom:1px solid var(--line)}
+  .tbl tr td:last-child{border-bottom:none}
+  .tbl .hl td{background:transparent}
+  .tbl .hl td:first-child{background:color-mix(in srgb,var(--blue) 14%,var(--surface))}
+
+  /* barra inferior */
+  .tabbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);padding:6px max(6px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px))}
+  .tabbar a,.tabbar button{display:grid;justify-items:center;gap:2px;padding:6px 2px;border:none;background:none;border-radius:6px;color:var(--muted);font:600 .7rem/1.1 var(--body);text-decoration:none;cursor:pointer;justify-self:stretch}
+  .tabbar [aria-current="true"],.tabbar button[aria-expanded="true"]{color:var(--navy);background:var(--surface-2)}
+  .tabbar a:focus-visible,.tabbar button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+
+  /* menu completo */
+  .sheet-bg{display:block;position:fixed;inset:0;z-index:16;background:rgba(10,12,30,.45)}
+  .sheet{display:grid;position:fixed;left:0;right:0;bottom:0;z-index:17;max-height:80vh;overflow-y:auto;background:var(--surface);border-radius:14px 14px 0 0;padding:8px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));box-shadow:0 -8px 30px rgba(0,0,0,.25)}
+  .sheet[hidden],.sheet-bg[hidden]{display:none}
+  .sheet-head{display:flex;justify-content:space-between;align-items:center;padding:8px 0 10px;border-bottom:1px solid var(--line)}
+  .sheet-head button{background:none;border:none;color:var(--blue);padding:6px 0;font-weight:600}
+  .sheet a{display:grid;gap:1px;padding:12px 2px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+  .sheet a:last-child{border-bottom:none}
+  .sheet a span{font-size:.85rem;color:var(--muted)}
+}
+:root[data-theme="dark"] .tabbar [aria-current="true"]{color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tabbar [aria-current="true"],:root:not([data-theme="light"]) .tabbar button[aria-expanded="true"]{color:var(--ink)}}
 </style><style>
 #offline-bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--warn-bg);color:var(--warn);font-weight:600;font-size:.9rem;text-align:center;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));border-top:1px solid var(--line)}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;-webkit-text-size-adjust:100%}
 body.is-offline{padding-bottom:56px}
+@media (max-width:700px){#offline-bar{bottom:calc(60px + env(safe-area-inset-bottom,0px));padding-bottom:10px;font-size:.82rem}body.is-offline{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}}
 img{max-width:100%}[hidden]{display:none!important}
 </style>
 </head>
 <body>
 
 
-<header class="hero">
+<header class="hero" id="topo">
   <div class="wrap">
     <div class="eyebrow">Pan-Retina · Lançamento BIOM® 6 · Uso interno da equipe comercial</div>
     <h1>BIOM 6: kit de negociação</h1>
@@ -216,6 +268,27 @@ img{max-width:100%}[hidden]{display:none!important}
     <a href="#fechamento">Fechamento</a>
   </div>
 </nav>
+
+<nav class="tabbar" aria-label="Acesso rápido">
+  <a href="#topo" data-sec="topo"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>Início</span></a>
+  <a href="#propostas" data-sec="propostas"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg><span>Preços</span></a>
+  <a href="#simulador" data-sec="simulador"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg><span>Simulador</span></a>
+  <a href="#objecoes" data-sec="objecoes"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Objeções</span></a>
+  <button type="button" id="menu-btn" aria-expanded="false" aria-controls="sheet"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span></button>
+</nav>
+<div class="sheet-bg" id="sheet-bg" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-label="Todas as seções" hidden>
+  <div class="sheet-head"><strong>Ir para</strong><button type="button" id="sheet-close" aria-label="Fechar">Fechar</button></div>
+  <a href="#pitch"><b>Pitch de 30 segundos</b><span>Como abrir a conversa</span></a>
+  <a href="#diferenciais"><b>Diferenciais</b><span>6 argumentos com frase pronta</span></a>
+  <a href="#consumivel"><b>BIOM 5 × BIOM 6</b><span>Comparação justa e custo por cirurgia</span></a>
+  <a href="#concorrencia"><b>Concorrência</b><span>Lentes de contato, sistemas integrados, BIOM 5</span></a>
+  <a href="#inversor"><b>Microscópio e inversor</b><span>Compatíveis e quando vender SDI 4c</span></a>
+  <a href="#propostas"><b>Propostas e combos</b><span>Opções A–D, brinde e combos</span></a>
+  <a href="#simulador"><b>Simulador</b><span>Monte e copie a proposta</span></a>
+  <a href="#objecoes"><b>Objeções</b><span>Respostas prontas</span></a>
+  <a href="#fechamento"><b>Fechamento</b><span>Roteiro e checklist</span></a>
+</div>
 
 <main>
 <section id="pitch">
@@ -294,15 +367,15 @@ img{max-width:100%}[hidden]{display:none!important}
     <div class="tbl"><table>
       <thead><tr><th>Critério</th><th>BIOM 5 (ML manual / CL elétrico)</th><th>BIOM 6</th></tr></thead>
       <tbody>
-        <tr><td>Preço de lista do equipamento</td><td class="num">R$ 134.545 (5ML) · R$ 153.834 (5CL)</td><td class="num">R$ 231.299</td></tr>
-        <tr><td>Lente dourada</td><td class="num">+ R$ 31.019 (vendida à parte)</td><td>Não se aplica</td></tr>
-        <tr class="hl"><td><strong>Total para operar</strong></td><td class="num"><strong>R$ 165.564 (5ML) · R$ 184.853 (5CL)</strong></td><td class="num"><strong>R$ 231.299 (+25% sobre o 5CL completo)</strong></td></tr>
-        <tr><td>Lentes inclusas</td><td>—</td><td>5 caixas Optic Set HD = 20 cirurgias</td></tr>
-        <tr><td>Modelo de uso</td><td>Óptica reutilizável, esterilizada entre cirurgias</td><td>Módulo reutilizável + capa e lente HD descartáveis</td></tr>
-        <tr><td>Preparo entre casos</td><td>Depende do ciclo da CME</td><td>Encaixe imediato, sem esterilização</td></tr>
-        <tr><td>Estado da óptica</td><td>Acumula uso e ciclos de esterilização</td><td>Lente nova em toda cirurgia</td></tr>
-        <tr><td>Foco</td><td>Manual (5ML) ou motorizado (5CL)</td><td>Interno, acionado magneticamente; lente frontal fixa</td></tr>
-        <tr><td>Reflexo da luz da sala</td><td>—</td><td>Design fechado, livre de reflexos</td></tr>
+        <tr><td data-label="Critério">Preço de lista do equipamento</td><td data-label="BIOM 5 (ML manual / CL elétrico)" class="num">R$ 134.545 (5ML) · R$ 153.834 (5CL)</td><td data-label="BIOM 6" class="num">R$ 231.299</td></tr>
+        <tr><td data-label="Critério">Lente dourada</td><td data-label="BIOM 5 (ML manual / CL elétrico)" class="num">+ R$ 31.019 (vendida à parte)</td><td data-label="BIOM 6">Não se aplica</td></tr>
+        <tr class="hl"><td data-label="Critério"><strong>Total para operar</strong></td><td data-label="BIOM 5 (ML manual / CL elétrico)" class="num"><strong>R$ 165.564 (5ML) · R$ 184.853 (5CL)</strong></td><td data-label="BIOM 6" class="num"><strong>R$ 231.299 (+25% sobre o 5CL completo)</strong></td></tr>
+        <tr><td data-label="Critério">Lentes inclusas</td><td data-label="BIOM 5 (ML manual / CL elétrico)">—</td><td data-label="BIOM 6">5 caixas Optic Set HD = 20 cirurgias</td></tr>
+        <tr><td data-label="Critério">Modelo de uso</td><td data-label="BIOM 5 (ML manual / CL elétrico)">Óptica reutilizável, esterilizada entre cirurgias</td><td data-label="BIOM 6">Módulo reutilizável + capa e lente HD descartáveis</td></tr>
+        <tr><td data-label="Critério">Preparo entre casos</td><td data-label="BIOM 5 (ML manual / CL elétrico)">Depende do ciclo da CME</td><td data-label="BIOM 6">Encaixe imediato, sem esterilização</td></tr>
+        <tr><td data-label="Critério">Estado da óptica</td><td data-label="BIOM 5 (ML manual / CL elétrico)">Acumula uso e ciclos de esterilização</td><td data-label="BIOM 6">Lente nova em toda cirurgia</td></tr>
+        <tr><td data-label="Critério">Foco</td><td data-label="BIOM 5 (ML manual / CL elétrico)">Manual (5ML) ou motorizado (5CL)</td><td data-label="BIOM 6">Interno, acionado magneticamente; lente frontal fixa</td></tr>
+        <tr><td data-label="Critério">Reflexo da luz da sala</td><td data-label="BIOM 5 (ML manual / CL elétrico)">—</td><td data-label="BIOM 6">Design fechado, livre de reflexos</td></tr>
       </tbody>
     </table></div>
     <div class="callout">
@@ -397,11 +470,11 @@ img{max-width:100%}[hidden]{display:none!important}
     <div class="tbl"><table>
       <thead><tr><th>Fabricante</th><th>Modelos com adaptação para BIOM 6</th><th>Controlador</th><th>Starter Kit na tabela 2026</th></tr></thead>
       <tbody>
-        <tr><td>Alcon</td><td>LuxOR® Revalia™</td><td>TL</td><td>Alcon/LuxOR/Revalia F175 e F200</td></tr>
-        <tr><td>Haag-Streit</td><td>METIS 900, HI-R NEO 900</td><td>TL</td><td>Haag-Streit F175 e F200</td></tr>
-        <tr><td>Leica</td><td>Proveo 8x, Proveo 8, M844, M822</td><td>PR</td><td>Leica F175 e F200</td></tr>
-        <tr><td>Zeiss</td><td>ARTEVO® 750, 800, 850; Lumera® 700, Lumera® T, Lumera® i</td><td>PR</td><td>Zeiss Lumera/Artevo F175 e F200</td></tr>
-        <tr><td>Bausch+Lomb</td><td>SeeLuma™</td><td>PR</td><td><span class="pill warn">Sem SKU na tabela: consultar</span></td></tr>
+        <tr><td data-label="Fabricante">Alcon</td><td data-label="Modelos com adaptação para BIOM 6">LuxOR® Revalia™</td><td data-label="Controlador">TL</td><td data-label="Starter Kit na tabela 2026">Alcon/LuxOR/Revalia F175 e F200</td></tr>
+        <tr><td data-label="Fabricante">Haag-Streit</td><td data-label="Modelos com adaptação para BIOM 6">METIS 900, HI-R NEO 900</td><td data-label="Controlador">TL</td><td data-label="Starter Kit na tabela 2026">Haag-Streit F175 e F200</td></tr>
+        <tr><td data-label="Fabricante">Leica</td><td data-label="Modelos com adaptação para BIOM 6">Proveo 8x, Proveo 8, M844, M822</td><td data-label="Controlador">PR</td><td data-label="Starter Kit na tabela 2026">Leica F175 e F200</td></tr>
+        <tr><td data-label="Fabricante">Zeiss</td><td data-label="Modelos com adaptação para BIOM 6">ARTEVO® 750, 800, 850; Lumera® 700, Lumera® T, Lumera® i</td><td data-label="Controlador">PR</td><td data-label="Starter Kit na tabela 2026">Zeiss Lumera/Artevo F175 e F200</td></tr>
+        <tr><td data-label="Fabricante">Bausch+Lomb</td><td data-label="Modelos com adaptação para BIOM 6">SeeLuma™</td><td data-label="Controlador">PR</td><td data-label="Starter Kit na tabela 2026"><span class="pill warn">Sem SKU na tabela: consultar</span></td></tr>
       </tbody>
     </table></div>
     <p class="note">O folheto lista os modelos compatíveis, mas não informa quais saem de fábrica com inversor integrado. Isso depende da configuração comprada pelo cliente. Confirme caso a caso antes de fechar sem SDI.</p>
@@ -418,11 +491,11 @@ img{max-width:100%}[hidden]{display:none!important}
     <div class="tbl"><table>
       <thead><tr><th>Opção</th><th class="num">Preço ao cliente</th><th>Condição</th><th>Para quem</th><th>Caixa de brinde</th></tr></thead>
       <tbody>
-        <tr><td>Lista</td><td class="num">R$ 231.299</td><td>—</td><td>Referência e âncora de preço</td><td><span class="pill ok">Pode oferecer</span></td></tr>
-        <tr class="hl"><td><strong>A · Lançamento</strong></td><td class="num">R$ 216.842</td><td>Pedido até 15/11; cota de 10 unidades</td><td>Quem decide no evento</td><td><span class="pill ok">Pode oferecer</span></td></tr>
-        <tr><td><strong>B · Upgrade BIOM 5 → 6</strong></td><td class="num">R$ 202.386</td><td>Troca de um BIOM 5 funcionando</td><td>Base instalada de BIOM 5</td><td><span class="pill no">Não</span></td></tr>
-        <tr class="hl"><td><strong>C · BIOM 6 + consumíveis</strong></td><td class="num">R$ 202.386</td><td>Contrato de 24 caixas de lentes em 24 meses</td><td>Alto volume (4 ou mais cirurgias/mês)</td><td><span class="pill no">Não</span></td></tr>
-        <tr><td><strong>D · Lista em 10× sem juros</strong></td><td class="num">10× R$ 23.130</td><td>Via Santander</td><td>Quem precisa de fluxo de caixa</td><td><span class="pill warn">Só com aprovação</span></td></tr>
+        <tr><td data-label="Opção">Lista</td><td data-label="Preço ao cliente" class="num">R$ 231.299</td><td data-label="Condição">—</td><td data-label="Para quem">Referência e âncora de preço</td><td data-label="Caixa de brinde"><span class="pill ok">Pode oferecer</span></td></tr>
+        <tr class="hl"><td data-label="Opção"><strong>A · Lançamento</strong></td><td data-label="Preço ao cliente" class="num">R$ 216.842</td><td data-label="Condição">Pedido até 15/11; cota de 10 unidades</td><td data-label="Para quem">Quem decide no evento</td><td data-label="Caixa de brinde"><span class="pill ok">Pode oferecer</span></td></tr>
+        <tr><td data-label="Opção"><strong>B · Upgrade BIOM 5 → 6</strong></td><td data-label="Preço ao cliente" class="num">R$ 202.386</td><td data-label="Condição">Troca de um BIOM 5 funcionando</td><td data-label="Para quem">Base instalada de BIOM 5</td><td data-label="Caixa de brinde"><span class="pill no">Não</span></td></tr>
+        <tr class="hl"><td data-label="Opção"><strong>C · BIOM 6 + consumíveis</strong></td><td data-label="Preço ao cliente" class="num">R$ 202.386</td><td data-label="Condição">Contrato de 24 caixas de lentes em 24 meses</td><td data-label="Para quem">Alto volume (4 ou mais cirurgias/mês)</td><td data-label="Caixa de brinde"><span class="pill no">Não</span></td></tr>
+        <tr><td data-label="Opção"><strong>D · Lista em 10× sem juros</strong></td><td data-label="Preço ao cliente" class="num">10× R$ 23.130</td><td data-label="Condição">Via Santander</td><td data-label="Para quem">Quem precisa de fluxo de caixa</td><td data-label="Caixa de brinde"><span class="pill warn">Só com aprovação</span></td></tr>
       </tbody>
     </table></div>
 
@@ -455,10 +528,10 @@ img{max-width:100%}[hidden]{display:none!important}
     <div class="tbl"><table>
       <thead><tr><th>Combo BIOM 6 + SDI 4c</th><th class="num">Compra separada</th><th class="num">Preço do combo</th><th>Condição</th><th>Caixa de brinde</th></tr></thead>
       <tbody>
-        <tr><td>Lista</td><td class="num">R$ 359.714</td><td class="num">R$ 359.714</td><td>—</td><td><span class="pill ok">Pode oferecer</span></td></tr>
-        <tr class="hl"><td><strong>Combo Lançamento (A)</strong></td><td class="num">R$ 359.714</td><td class="num"><strong>R$ 337.231</strong></td><td>Pedido até 15/11. Economia de R$ 22.483</td><td><span class="pill ok">Pode oferecer</span></td></tr>
-        <tr><td>Combo Upgrade (B) ou Consumíveis (C)</td><td class="num">R$ 359.714</td><td class="num">R$ 314.749</td><td>Mesma contrapartida da B ou da C</td><td><span class="pill no">Não</span></td></tr>
-        <tr><td>Combo Parcelado (D)</td><td class="num">R$ 359.714</td><td class="num">10× R$ 35.971</td><td>Santander, sem juros</td><td><span class="pill warn">Só com aprovação</span></td></tr>
+        <tr><td data-label="Combo BIOM 6 + SDI 4c">Lista</td><td data-label="Compra separada" class="num">R$ 359.714</td><td data-label="Preço do combo" class="num">R$ 359.714</td><td data-label="Condição">—</td><td data-label="Caixa de brinde"><span class="pill ok">Pode oferecer</span></td></tr>
+        <tr class="hl"><td data-label="Combo BIOM 6 + SDI 4c"><strong>Combo Lançamento (A)</strong></td><td data-label="Compra separada" class="num">R$ 359.714</td><td data-label="Preço do combo" class="num"><strong>R$ 337.231</strong></td><td data-label="Condição">Pedido até 15/11. Economia de R$ 22.483</td><td data-label="Caixa de brinde"><span class="pill ok">Pode oferecer</span></td></tr>
+        <tr><td data-label="Combo BIOM 6 + SDI 4c">Combo Upgrade (B) ou Consumíveis (C)</td><td data-label="Compra separada" class="num">R$ 359.714</td><td data-label="Preço do combo" class="num">R$ 314.749</td><td data-label="Condição">Mesma contrapartida da B ou da C</td><td data-label="Caixa de brinde"><span class="pill no">Não</span></td></tr>
+        <tr><td data-label="Combo BIOM 6 + SDI 4c">Combo Parcelado (D)</td><td data-label="Compra separada" class="num">R$ 359.714</td><td data-label="Preço do combo" class="num">10× R$ 35.971</td><td data-label="Condição">Santander, sem juros</td><td data-label="Caixa de brinde"><span class="pill warn">Só com aprovação</span></td></tr>
       </tbody>
     </table></div>
     <p class="note">SDI 4c isolado: R$ 128.415 na lista. Combo D considera a mesma taxa Santander da Opção D; confirme a taxa antes de oferecer. O cliente de upgrade (B) normalmente já tem inversor do BIOM 5: verifique se é SDI 4c/4cli antes de incluir um novo.</p>
@@ -653,6 +726,26 @@ img{max-width:100%}[hidden]{display:none!important}
   render();
 })();
 </script>
+<script>
+(function(){
+  var sheet=document.getElementById("sheet"),bg=document.getElementById("sheet-bg"),btn=document.getElementById("menu-btn");
+  function open(v){sheet.hidden=!v;bg.hidden=!v;btn.setAttribute("aria-expanded",v?"true":"false")}
+  btn.addEventListener("click",function(){open(sheet.hidden)});
+  document.getElementById("sheet-close").addEventListener("click",function(){open(false)});
+  bg.addEventListener("click",function(){open(false)});
+  sheet.addEventListener("click",function(e){if(e.target.closest("a"))open(false)});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")open(false)});
+  var tabs=[].slice.call(document.querySelectorAll(".tabbar a[data-sec]"));
+  var map={topo:"topo",pitch:"topo",diferenciais:"topo",consumivel:"topo",concorrencia:"topo",inversor:"topo",propostas:"propostas",simulador:"simulador",objecoes:"objecoes",fechamento:"objecoes"};
+  function mark(id){tabs.forEach(function(a){a.setAttribute("aria-current",a.dataset.sec===map[id]?"true":"false")})}
+  mark("topo");
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)mark(e.target.id)})},{rootMargin:"-45% 0px -50% 0px"});
+    document.querySelectorAll("#topo, main section[id]").forEach(function(el){io.observe(el)});
+  }
+})();
+</script>
+
 
 <div id="offline-bar" hidden role="status">Sem internet: você está usando a versão salva no aparelho.</div>
 
