@@ -1,5 +1,5 @@
 // Kit BIOM 6 — service worker. Altere VERSION a cada atualização de preços/conteúdo.
-const VERSION = "biom6-2026-10-16-v5";
+const VERSION = "biom6-2026-10-16-v6";
 const ASSETS = [
   "./",
   "index.html",
