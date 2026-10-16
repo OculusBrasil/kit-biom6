@@ -179,6 +179,24 @@ footer .wrap{display:grid;gap:10px}
 html{scroll-behavior:smooth}
 section{scroll-margin-top:56px}
 
+
+/* atalhos */
+.atalhos{padding-block:28px}
+.atalhos .head{margin-bottom:14px}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+.tile{display:grid;gap:4px;align-content:start;min-height:84px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink)}
+.tile .k{font-family:var(--display);font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre)}
+.tile .q{font-weight:600;line-height:1.3}
+.tile:hover{border-color:var(--blue)}
+.tile:active{background:var(--surface-2)}
+.tile:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+[id]{scroll-margin-top:64px}
+@media (max-width:700px){[id]{scroll-margin-top:calc(12px + env(safe-area-inset-top,0px))}}
+@keyframes flash{0%{box-shadow:0 0 0 3px var(--blue)}100%{box-shadow:0 0 0 3px transparent}}
+.flash{animation:flash 1.6s ease-out}
+@media (prefers-reduced-motion: reduce){.flash{animation:none}}
 /* ---------- celular ---------- */
 .tabbar,.sheet,.sheet-bg{display:none}
 @media (max-width:700px){
@@ -270,7 +288,7 @@ img{max-width:100%}[hidden]{display:none!important}
 </nav>
 
 <nav class="tabbar" aria-label="Acesso rápido">
-  <a href="#topo" data-sec="topo"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>Início</span></a>
+  <a href="#atalhos" data-sec="topo"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>Início</span></a>
   <a href="#propostas" data-sec="propostas"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg><span>Preços</span></a>
   <a href="#simulador" data-sec="simulador"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg><span>Simulador</span></a>
   <a href="#objecoes" data-sec="objecoes"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Objeções</span></a>
@@ -291,6 +309,27 @@ img{max-width:100%}[hidden]{display:none!important}
 </div>
 
 <main>
+
+<section id="atalhos" class="atalhos" aria-labelledby="atalhos-t">
+  <div class="wrap stack">
+    <div class="head"><div class="eyebrow">Acesso rápido</div><h2 id="atalhos-t">O que você precisa agora?</h2></div>
+    <div class="tiles">
+      <a class="tile" href="#propostas"><span class="k">Preços</span><span class="q">Quanto custa cada opção?</span></a>
+      <a class="tile" href="#regra-brinde"><span class="k">Brinde</span><span class="q">Posso dar a caixa de lentes?</span></a>
+      <a class="tile" href="#simulador"><span class="k">Proposta</span><span class="q">Montar e copiar a proposta</span></a>
+      <a class="tile" href="#inversor"><span class="k">Inversor</span><span class="q">O cliente precisa de SDI?</span></a>
+      <a class="tile" href="#modelos"><span class="k">Compatibilidade</span><span class="q">O microscópio dele é compatível?</span></a>
+      <a class="tile" href="#combos"><span class="k">Combo</span><span class="q">Preço do combo com SDI 4c</span></a>
+      <a class="tile" href="#comparacao"><span class="k">Objeção</span><span class="q">“Está caro” · BIOM 5 × BIOM 6</span></a>
+      <a class="tile" href="#custo-cirurgia"><span class="k">Consumível</span><span class="q">Quanto custa por cirurgia?</span></a>
+      <a class="tile" href="#objecoes"><span class="k">Objeções</span><span class="q">Todas as respostas prontas</span></a>
+      <a class="tile" href="#pitch"><span class="k">Abertura</span><span class="q">Como começar a conversa</span></a>
+      <a class="tile" href="#diferenciais"><span class="k">Produto</span><span class="q">Os 6 diferenciais</span></a>
+      <a class="tile" href="#concorrencia"><span class="k">Concorrência</span><span class="q">Como posicionar contra cada um</span></a>
+      <a class="tile" href="#fechamento"><span class="k">Fechamento</span><span class="q">Roteiro e checklist</span></a>
+    </div>
+  </div>
+</section>
 <section id="pitch">
   <div class="wrap stack">
     <div class="head">
@@ -362,7 +401,7 @@ img{max-width:100%}[hidden]{display:none!important}
     <div class="head">
       <div class="eyebrow">O ponto mais sensível da venda</div>
       <h2>BIOM 5 × BIOM 6: o consumível é argumento, não custo</h2>
-      <p class="muted">O cliente compara a lista do BIOM 5 com a do BIOM 6 e vê 50% de diferença. A conta está incompleta: o BIOM 5 é vendido sem a lente dourada, e o BIOM 6 já vem com 20 cirurgias de lentes. Na comparação justa, a diferença cai para 25%. O descartável é o que elimina a esterilização e garante óptica nova em todo caso.</p>
+      <p class="muted">O cliente compara a lista do BIOM 5 com a do BIOM 6 e vê 50% de diferença. A conta está incompleta: o BIOM 5 é vendido sem a lente dourada, e o BIOM 6 já vem com 8 cirurgias de lentes. Na comparação justa, a diferença cai para 25%. O descartável é o que elimina a esterilização e garante óptica nova em todo caso.</p>
     </div>
     <div class="tbl"><table>
       <thead><tr><th>Critério</th><th>BIOM 5 (ML manual / CL elétrico)</th><th>BIOM 6</th></tr></thead>
@@ -370,7 +409,7 @@ img{max-width:100%}[hidden]{display:none!important}
         <tr><td data-label="Critério">Preço de lista do equipamento</td><td data-label="BIOM 5 (ML manual / CL elétrico)" class="num">R$ 134.545 (5ML) · R$ 153.834 (5CL)</td><td data-label="BIOM 6" class="num">R$ 231.299</td></tr>
         <tr><td data-label="Critério">Lente dourada</td><td data-label="BIOM 5 (ML manual / CL elétrico)" class="num">+ R$ 31.019 (vendida à parte)</td><td data-label="BIOM 6">Não se aplica</td></tr>
         <tr class="hl"><td data-label="Critério"><strong>Total para operar</strong></td><td data-label="BIOM 5 (ML manual / CL elétrico)" class="num"><strong>R$ 165.564 (5ML) · R$ 184.853 (5CL)</strong></td><td data-label="BIOM 6" class="num"><strong>R$ 231.299 (+25% sobre o 5CL completo)</strong></td></tr>
-        <tr><td data-label="Critério">Lentes inclusas</td><td data-label="BIOM 5 (ML manual / CL elétrico)">—</td><td data-label="BIOM 6">5 caixas Optic Set HD = 20 cirurgias</td></tr>
+        <tr><td data-label="Critério">Lentes inclusas</td><td data-label="BIOM 5 (ML manual / CL elétrico)">—</td><td data-label="BIOM 6">2 caixas Optic Set HD = 8 cirurgias</td></tr>
         <tr><td data-label="Critério">Modelo de uso</td><td data-label="BIOM 5 (ML manual / CL elétrico)">Óptica reutilizável, esterilizada entre cirurgias</td><td data-label="BIOM 6">Módulo reutilizável + capa e lente HD descartáveis</td></tr>
         <tr><td data-label="Critério">Preparo entre casos</td><td data-label="BIOM 5 (ML manual / CL elétrico)">Depende do ciclo da CME</td><td data-label="BIOM 6">Encaixe imediato, sem esterilização</td></tr>
         <tr><td data-label="Critério">Estado da óptica</td><td data-label="BIOM 5 (ML manual / CL elétrico)">Acumula uso e ciclos de esterilização</td><td data-label="BIOM 6">Lente nova em toda cirurgia</td></tr>
@@ -378,19 +417,19 @@ img{max-width:100%}[hidden]{display:none!important}
         <tr><td data-label="Critério">Reflexo da luz da sala</td><td data-label="BIOM 5 (ML manual / CL elétrico)">—</td><td data-label="BIOM 6">Design fechado, livre de reflexos</td></tr>
       </tbody>
     </table></div>
-    <div class="callout">
+    <div class="callout" id="comparacao">
       <div class="eyebrow">A comparação justa</div>
       <div class="lines">
         <div><span>BIOM 5CL + lente dourada (pronto para operar)</span><span>R$ 184.853</span></div>
         <div><span>BIOM 6 Starter Kit (lista)</span><span>R$ 231.299</span></div>
         <div><span>Diferença real</span><span>+25%, não +50%</span></div>
-        <div><span>Já incluso no BIOM 6</span><span>5 caixas Optic Set HD (20 cirurgias)</span></div>
+        <div><span>Já incluso no BIOM 6</span><span>2 caixas Optic Set HD (8 cirurgias)</span></div>
       </div>
       <p>Na Opção A, a diferença para o BIOM 5CL completo cai para 17%.</p>
-      <p class="say">“Doutor, para operar com o BIOM 5 o senhor ainda precisa da lente dourada. Comparando completo com completo, a diferença é de 25%, e o BIOM 6 já vem com 20 cirurgias de lentes.”</p>
+      <p class="say">“Doutor, para operar com o BIOM 5 o senhor ainda precisa da lente dourada. Comparando completo com completo, a diferença é de 25%, e o BIOM 6 já vem com 8 cirurgias de lentes.”</p>
     </div>
     <div class="grid2">
-      <div class="callout">
+      <div class="callout" id="custo-cirurgia">
         <div class="eyebrow">Custo por cirurgia para o cliente</div>
         <p>Caixa de Optic Set HD com 4 unidades: <strong>R$ 12.211</strong> na lista, ou seja, <strong>cerca de R$ 3.053 por cirurgia</strong>. No contrato da Opção C, a referência sugerida é R$ 11.448 por caixa (R$ 2.862 por cirurgia).</p>
         <p class="say">“É um custo por paciente, previsível, que entra no orçamento da cirurgia como material descartável. A esterilização também custa, só que ninguém coloca na conta.”</p>
@@ -467,7 +506,7 @@ img{max-width:100%}[hidden]{display:none!important}
         <p class="say">“Resolvemos tudo em uma compra: o BIOM 6 e o inversor, com um preço de combo que não sai na compra separada.”</p>
       </div>
     </div>
-    <div class="tbl"><table>
+    <div class="tbl" id="modelos"><table>
       <thead><tr><th>Fabricante</th><th>Modelos com adaptação para BIOM 6</th><th>Controlador</th><th>Starter Kit na tabela 2026</th></tr></thead>
       <tbody>
         <tr><td data-label="Fabricante">Alcon</td><td data-label="Modelos com adaptação para BIOM 6">LuxOR® Revalia™</td><td data-label="Controlador">TL</td><td data-label="Starter Kit na tabela 2026">Alcon/LuxOR/Revalia F175 e F200</td></tr>
@@ -486,7 +525,7 @@ img{max-width:100%}[hidden]{display:none!important}
     <div class="head">
       <div class="eyebrow">Condições comerciais</div>
       <h2>Quatro portas de entrada, um piso de preço</h2>
-      <p class="muted">Todas as opções incluem o Starter Kit com 5 caixas de Optic Set HD (20 cirurgias). Nenhum preço abaixo de R$ 202.386 para o BIOM 6 sozinho.</p>
+      <p class="muted">As opções com lentes (Lista e Opção A) incluem 2 caixas de Optic Set HD (8 cirurgias). Nenhum preço abaixo de R$ 202.386 para o BIOM 6 sozinho.</p>
     </div>
     <div class="tbl"><table>
       <thead><tr><th>Opção</th><th class="num">Preço ao cliente</th><th>Condição</th><th>Para quem</th><th>Caixa de brinde</th></tr></thead>
@@ -500,11 +539,11 @@ img{max-width:100%}[hidden]{display:none!important}
     </table></div>
 
     <div class="split">
-      <div class="callout">
+      <div class="callout" id="regra-brinde">
         <div class="eyebrow">Regra da caixa de lentes de brinde</div>
         <p>Uma caixa de Optic Set HD (4 cirurgias, R$ 12.211 na lista) é a sua <strong>ferramenta de fechamento</strong>, não um desconto automático.</p>
         <ul class="check">
-          <li>Use na <strong>Opção A</strong> para fechar no evento: “Fechando até 15/11, o senhor leva o kit com 20 cirurgias e mais uma caixa: são 24 casos sem custo de lente.”</li>
+          <li>Use na <strong>Opção A</strong> para fechar no evento: “Fechando até 15/11, o senhor leva o kit com 8 cirurgias e mais uma caixa: são 12 casos sem custo de lente.”</li>
           <li>Pode usar sobre o preço de lista e no Combo Lançamento (A) com inversor.</li>
           <li><strong>Nunca</strong> na Opção B (trade-in) nem na Opção C (contrato de lentes), com ou sem inversor.</li>
           <li>Opção D (financiamento), com ou sem inversor: só com aprovação da gerência.</li>
@@ -524,7 +563,7 @@ img{max-width:100%}[hidden]{display:none!important}
       </div>
     </div>
 
-    <h3>Combos com inversor SDI 4c (para microscópio sem inversor integrado)</h3>
+    <h3 id="combos">Combos com inversor SDI 4c (para microscópio sem inversor integrado)</h3>
     <div class="tbl"><table>
       <thead><tr><th>Combo BIOM 6 + SDI 4c</th><th class="num">Compra separada</th><th class="num">Preço do combo</th><th>Condição</th><th>Caixa de brinde</th></tr></thead>
       <tbody>
@@ -598,11 +637,11 @@ img{max-width:100%}[hidden]{display:none!important}
     </div>
     <div>
       <details open><summary>“Está 50% mais caro que o BIOM 5.”</summary><div class="body">
-        <p>Corrija a comparação antes de discutir valor. O BIOM 5 de lista não inclui a lente dourada (R$ 31.019). Completo, o 5CL vai a R$ 184.853: a diferença real é de 25%, e o BIOM 6 já traz 20 cirurgias de lentes.</p>
-        <p class="say">“Doutor, nessa conta o BIOM 5 está sem a lente dourada. Completo com completo, a diferença é de 25%, e o BIOM 6 já vem com 20 cirurgias de lentes. E se o senhor já tem um BIOM 5, a troca reduz o investimento para R$ 202.386.”</p></div></details>
+        <p>Corrija a comparação antes de discutir valor. O BIOM 5 de lista não inclui a lente dourada (R$ 31.019). Completo, o 5CL vai a R$ 184.853: a diferença real é de 25%, e o BIOM 6 já traz 8 cirurgias de lentes.</p>
+        <p class="say">“Doutor, nessa conta o BIOM 5 está sem a lente dourada. Completo com completo, a diferença é de 25%, e o BIOM 6 já vem com 8 cirurgias de lentes. E se o senhor já tem um BIOM 5, a troca reduz o investimento para R$ 202.386.”</p></div></details>
       <details><summary>“Não quero ter custo recorrente com lente.”</summary><div class="body">
-        <p>Mostre o custo por cirurgia (cerca de R$ 2.862 a R$ 3.053) e o que ele substitui: ciclo de CME, tempo de sala parada e desgaste da óptica. Lembre que as primeiras 20 cirurgias já vêm no kit.</p>
-        <p class="say">“As primeiras 20 cirurgias estão incluídas. Depois, é um custo por paciente que entra no orçamento do procedimento.”</p></div></details>
+        <p>Mostre o custo por cirurgia (cerca de R$ 2.862 a R$ 3.053) e o que ele substitui: ciclo de CME, tempo de sala parada e desgaste da óptica. Lembre que as primeiras 8 cirurgias já vêm no kit.</p>
+        <p class="say">“As primeiras 8 cirurgias estão incluídas. Depois, é um custo por paciente que entra no orçamento do procedimento.”</p></div></details>
       <details><summary>“Meu microscópio já tem sistema próprio de grande angular.”</summary><div class="body">
         <p>Não ataque o sistema dele. Pergunte sobre as outras salas e sobre a troca futura de microscópio. O argumento é independência de marca e o sistema original.</p>
         <p class="say">“O BIOM 6 funciona em cinco fabricantes. Se o centro tiver ou vier a ter outra marca, o mesmo sistema atende todas as salas.”</p></div></details>
@@ -696,7 +735,7 @@ img{max-width:100%}[hidden]{display:none!important}
     $("o-status").innerHTML=st;
     var L=[];
     var full=(gs==="ok");
-    L.push([full?"BIOM 6 Starter Kit "+mic+" "+f+" (inclui 5 caixas Optic Set HD = 20 cirurgias)":"BIOM 6 · "+mic+" "+f, sdi?"":fmt(d.solo)]);
+    L.push([full?"BIOM 6 Starter Kit "+mic+" "+f+" (inclui 2 caixas Optic Set HD = 8 cirurgias)":"BIOM 6 · "+mic+" "+f, sdi?"":fmt(d.solo)]);
     if(sdi) L.push(["+ OCULUS SDI 4c elétrico com cabo"+(mic==="Leica"?" (versão Leica)":""),""]);
     if(sdi) L.push(["Preço do combo", fmt(d.combo)]);
     if(sdi && o!=="L" && o!=="D") L.push(["Economia vs. compra separada", fmt(359714-d.combo)]);
@@ -705,9 +744,9 @@ img{max-width:100%}[hidden]{display:none!important}
     if(o==="D") L.push(["Total parcelado", fmt(total)]);
     if(o==="C") L.push(["Contrato de lentes: 24 caixas × "+fmt(BOX_C)+" (ref.)", fmt(24*BOX_C)]);
     $("o-lines").innerHTML=L.map(function(r){return "<div><span>"+r[0]+"</span><span>"+r[1]+"</span></div>"}).join("");
-    var cir=20+((gift&&gs==="ok")?4:0);
+    var cir=8+((gift&&gs==="ok")?4:0);
     var t="Proposta OCULUS · BIOM® 6\n"+d.name+"\n\n";
-    t+=full?"• BIOM 6 Starter Kit para "+mic+" "+f+", com 5 caixas de Optic Set HD\n":"• BIOM 6 · "+mic+" "+f+"\n";
+    t+=full?"• BIOM 6 Starter Kit para "+mic+" "+f+", com 2 caixas de Optic Set HD\n":"• BIOM 6 · "+mic+" "+f+"\n";
     if(sdi) t+="• Inversor OCULUS SDI 4c elétrico com cabo\n";
     if(gift&&gs==="ok") t+="• 1 caixa adicional de Optic Set HD como cortesia\n";
     t+=full?"\nCirurgias com lente inclusa: "+cir+"\n":"\n";
@@ -736,7 +775,7 @@ img{max-width:100%}[hidden]{display:none!important}
   sheet.addEventListener("click",function(e){if(e.target.closest("a"))open(false)});
   document.addEventListener("keydown",function(e){if(e.key==="Escape")open(false)});
   var tabs=[].slice.call(document.querySelectorAll(".tabbar a[data-sec]"));
-  var map={topo:"topo",pitch:"topo",diferenciais:"topo",consumivel:"topo",concorrencia:"topo",inversor:"topo",propostas:"propostas",simulador:"simulador",objecoes:"objecoes",fechamento:"objecoes"};
+  var map={topo:"topo",atalhos:"topo",pitch:"topo",diferenciais:"topo",consumivel:"topo",concorrencia:"topo",inversor:"topo",propostas:"propostas",simulador:"simulador",objecoes:"objecoes",fechamento:"objecoes"};
   function mark(id){tabs.forEach(function(a){a.setAttribute("aria-current",a.dataset.sec===map[id]?"true":"false")})}
   mark("topo");
   if("IntersectionObserver" in window){
@@ -745,6 +784,10 @@ img{max-width:100%}[hidden]{display:none!important}
   }
 })();
 </script>
+<script>
+document.addEventListener("click",function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;var t=document.getElementById(a.getAttribute("href").slice(1));if(!t||t.tagName==="SECTION"||t.id==="topo")return;t.classList.remove("flash");void t.offsetWidth;t.classList.add("flash")});
+</script>
+
 
 
 <div id="offline-bar" hidden role="status">Sem internet: você está usando a versão salva no aparelho.</div>
