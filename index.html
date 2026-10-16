@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kit BIOM 6</title>
+<meta name="description" content="Kit de negociação BIOM 6 para a equipe comercial OCULUS Brasil">
+<meta name="theme-color" content="#1e2461">
+<meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kit BIOM 6">
+<style>
+@font-face{font-family:"Barlow";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/barlow-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/barlow-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/barlow-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow Semi Condensed";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/barlow-semi-condensed-latin-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow Semi Condensed";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/barlow-semi-condensed-latin-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Barlow Semi Condensed";font-style:normal;font-weight:700;font-display:swap;src:url("fonts/barlow-semi-condensed-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2")}
+/* Layout: manual de campo — faixa de navegação fixa, seções verticais, tabelas de preço como peças centrais, simulador no bloco de propostas */
+:root{
+  --bg:#f5f6f3; --surface:#ffffff; --surface-2:#eceee9; --line:#d4d7d0;
+  --ink:#1c1f3a; --muted:#585d78;
+  --navy:#1e2461; --navy-ink:#ffffff;
+  --blue:#0a7fc2; --ochre:#9a5a06;
+  --ok:#1f7a4a; --ok-bg:#e3f2e9; --warn:#8a5a00; --warn-bg:#fbefd6; --no:#a12f2f; --no-bg:#f8e2e0;
+  --display:"Barlow Semi Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10132a; --surface:#171b38; --surface-2:#1f2446; --line:#2e345c;
+  --ink:#e7e9f4; --muted:#a3a8c6;
+  --navy:#2a3285; --navy-ink:#ffffff;
+  --blue:#5bb8ee; --ochre:#e3a34e;
+  --ok:#7fd3a3; --ok-bg:#163828; --warn:#f0c46e; --warn-bg:#3a2e12; --no:#f29a92; --no-bg:#3e1c1c;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10132a; --surface:#171b38; --surface-2:#1f2446; --line:#2e345c;
+  --ink:#e7e9f4; --muted:#a3a8c6;
+  --navy:#2a3285; --navy-ink:#ffffff;
+  --blue:#5bb8ee; --ochre:#e3a34e;
+  --ok:#7fd3a3; --ok-bg:#163828; --warn:#f0c46e; --warn-bg:#3a2e12; --no:#f29a92; --no-bg:#3e1c1c;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h2{font-size:1.75rem;color:var(--navy)}
+:root[data-theme="dark"] h2{color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) h2{color:var(--ink)}}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0}
+.num,td.num,.price{font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
+.muted{color:var(--muted)}
+a{color:var(--blue)}
+
+/* hero */
+.hero{background:var(--navy);color:var(--navy-ink)}
+.hero .wrap{padding-block:36px 32px;display:grid;gap:20px}
+.hero .eyebrow{color:#f2c27a}
+.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:700}
+.hero p.lead{max-width:62ch;opacity:.92}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.18);border-radius:6px;overflow:hidden}
+.fact{background:var(--navy);padding:14px 16px;display:grid;gap:2px}
+.fact span{font-size:.8rem;opacity:.8}
+.fact strong{font-family:var(--display);font-size:1.45rem;font-weight:600;font-variant-numeric:tabular-nums}
+.fact em{font-style:normal;font-size:.8rem;opacity:.8}
+@media (max-width:760px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* nav */
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:8px;scrollbar-width:thin}
+nav.toc a{flex:none;text-decoration:none;color:var(--ink);font-family:var(--display);font-weight:600;font-size:.95rem;padding:6px 12px;border-radius:4px;white-space:nowrap}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--surface-2);outline:none}
+
+section{padding-block:44px;border-bottom:1px solid var(--line)}
+section .head{display:grid;gap:6px;margin-bottom:22px;max-width:70ch}
+.pitch{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 22px;display:grid;gap:10px}
+.pitch blockquote{margin:0;font-size:1.12rem;line-height:1.6}
+.pitch .who{font-size:.85rem;color:var(--muted)}
+
+/* diferenciais */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:900px){.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.grid3,.grid2{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.card dl{margin:0;display:grid;gap:8px}
+.card dt{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.card dd{margin:0}
+.say{background:var(--surface-2);border-radius:4px;padding:10px 12px;font-size:.95rem}
+.say::before{content:"Fale assim: ";font-weight:600;color:var(--blue)}
+
+/* tabelas */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.95rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:600;font-size:.85rem;letter-spacing:.04em;background:var(--surface-2)}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;white-space:nowrap}
+.hl td{background:color-mix(in srgb,var(--blue) 8%,var(--surface))}
+.pill{display:inline-block;font-size:.78rem;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.no{background:var(--no-bg);color:var(--no)}
+.note{font-size:.88rem;color:var(--muted);margin-top:10px}
+
+/* callouts */
+.callout{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:16px 18px;display:grid;gap:8px}
+.callout.strong{background:var(--navy);color:var(--navy-ink);border-color:var(--navy)}
+.callout.strong .eyebrow{color:#f2c27a}
+.stack{display:grid;gap:18px}
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:820px){.split{grid-template-columns:minmax(0,1fr)}}
+
+/* fluxo inversor */
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:st}
+@media (max-width:760px){.flow{grid-template-columns:minmax(0,1fr)}}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;gap:6px;align-content:start}
+.step b.n{font-family:var(--mono);font-size:.8rem;color:var(--ochre)}
+.branch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:620px){.branch{grid-template-columns:minmax(0,1fr)}}
+.branch .card{border-top:4px solid var(--blue)}
+.branch .card.alt{border-top-color:var(--ochre)}
+
+/* simulador */
+.sim{background:var(--surface);border:1px solid var(--line);border-radius:6px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+@media (max-width:820px){.sim{grid-template-columns:minmax(0,1fr)}}
+.sim .in{padding:20px;display:grid;gap:16px;border-right:1px solid var(--line);align-content:start}
+@media (max-width:820px){.sim .in{border-right:none;border-bottom:1px solid var(--line)}}
+.sim .out{padding:20px;display:grid;gap:14px;align-content:start}
+fieldset{border:none;margin:0;padding:0;display:grid;gap:8px}
+legend{font-family:var(--display);font-weight:600;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;padding:0}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts label{cursor:pointer}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts span{display:inline-block;padding:7px 12px;border:1px solid var(--line);border-radius:4px;font-weight:500;font-size:.92rem;background:var(--bg)}
+.opts input:checked+span{background:var(--navy);color:var(--navy-ink);border-color:var(--navy)}
+.opts input:focus-visible+span{outline:2px solid var(--blue);outline-offset:2px}
+.chk{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.chk input{margin-top:4px;width:18px;height:18px;accent-color:var(--navy)}
+.chk input:disabled{cursor:not-allowed}
+.chk input:disabled+span{opacity:.55}
+select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);max-width:100%}
+.bigprice{font-family:var(--display);font-size:2.4rem;font-weight:700;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
+:root[data-theme="dark"] .bigprice{color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bigprice{color:var(--ink)}}
+.lines{display:grid;gap:6px;font-size:.95rem}
+.lines div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:6px}
+.lines div span:last-child{font-variant-numeric:tabular-nums;text-align:right}
+textarea{width:100%;min-height:150px;font:inherit;font-size:.9rem;padding:10px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);resize:vertical}
+button{font:inherit;font-weight:600;padding:9px 14px;border-radius:4px;border:1px solid var(--navy);background:var(--navy);color:var(--navy-ink);cursor:pointer;justify-self:start}
+button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* objeções */
+details{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:0}
+details+details{margin-top:8px}
+summary{cursor:pointer;padding:14px 16px;font-weight:600;list-style:none;display:flex;gap:10px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font-family:var(--mono);color:var(--ochre)}
+details[open] summary::before{content:"−"}
+details .body{padding:0 16px 16px 36px;display:grid;gap:8px}
+
+ol.steps{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px}
+ol.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);color:var(--ochre);font-size:.9rem;padding-top:2px}
+ul.check{margin:0;padding-left:1.1rem;display:grid;gap:6px}
+footer{padding-block:28px 48px;font-size:.88rem;color:var(--muted)}
+footer .wrap{display:grid;gap:10px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+section{scroll-margin-top:56px}
+</style><style>
+#offline-bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--warn-bg);color:var(--warn);font-weight:600;font-size:.9rem;text-align:center;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));border-top:1px solid var(--line)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;-webkit-text-size-adjust:100%}
+body.is-offline{padding-bottom:56px}
+img{max-width:100%}[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Pan-Retina · Lançamento BIOM® 6 · Uso interno da equipe comercial</div>
+    <h1>BIOM 6: kit de negociação</h1>
+    <p class="lead">Tudo o que você precisa para fechar o BIOM 6: argumentos que diferenciam, as quatro portas de entrada da proposta, quando usar a caixa de lentes de brinde, quais microscópios dispensam inversor e o combo com SDI 4c para os que não dispensam.</p>
+    <div class="facts">
+      <div class="fact"><span>Preço de lista</span><strong>R$ 231.299</strong><em>referência</em></div>
+      <div class="fact"><span>Lançamento (Opção A)</span><strong>R$ 216.842</strong><em>pedido até 15/11 · cota de 10 un.</em></div>
+      <div class="fact"><span>Menor preço (B e C)</span><strong>R$ 202.386</strong><em>só com contrapartida</em></div>
+      <div class="fact"><span>Parcelado (Opção D)</span><strong>10× R$ 23.130</strong><em>sem juros · Santander</em></div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Seções">
+  <div class="wrap">
+    <a href="#pitch">Pitch</a>
+    <a href="#diferenciais">Diferenciais</a>
+    <a href="#consumivel">BIOM 5 × BIOM 6</a>
+    <a href="#concorrencia">Concorrência</a>
+    <a href="#inversor">Microscópio e inversor</a>
+    <a href="#propostas">Propostas e combos</a>
+    <a href="#simulador">Simulador</a>
+    <a href="#objecoes">Objeções</a>
+    <a href="#fechamento">Fechamento</a>
+  </div>
+</nav>
+
+<main>
+<section id="pitch">
+  <div class="wrap stack">
+    <div class="head">
+      <div class="eyebrow">Abertura</div>
+      <h2>O pitch em 30 segundos</h2>
+      <p class="muted">Abra pela rotina do centro cirúrgico, não pelo preço. O preço vem depois que o cirurgião concordou com o problema.</p>
+    </div>
+    <div class="pitch">
+      <blockquote>“Doutor, o BIOM 6 é a evolução do sistema que a OCULUS criou em 1985. Ele resolve três coisas que atrapalham a vitrectomia: reflexo da luz da sala, risco de encostar na córnea quando você ajusta o foco e o tempo perdido com esterilização entre um caso e outro. O foco é interno: a lente frontal não se mexe. E cada cirurgia começa com óptica nova, sem passar pela esterilização. Ele se adapta a microscópios Zeiss, Leica, Alcon, Haag-Streit e Bausch+Lomb, nas distâncias de 175 e 200 mm. Posso te mostrar como fica no seu microscópio?”</blockquote>
+      <p class="who">Termine sempre com uma pergunta sobre o microscópio. Ela abre a qualificação técnica (seção “Microscópio e inversor”).</p>
+    </div>
+  </div>
+</section>
+
+<section id="diferenciais">
+  <div class="wrap stack">
+    <div class="head">
+      <div class="eyebrow">Argumentos de produto</div>
+      <h2>Seis diferenciais e como transformar cada um em valor</h2>
+      <p class="muted">Fonte: folheto oficial BIOM 6 (OCULUS, 03/26). Use só o que está aqui. Não prometa números de campo de visão ou faixa de foco: o material oficial não traz esses valores.</p>
+    </div>
+    <div class="grid3">
+      <article class="card">
+        <h3>Livre de reflexos sob qualquer luz</h3>
+        <dl><dt>O que é</dt><dd>Design óptico fechado. A luz ambiente não chega à lente frontal.</dd>
+        <dt>Ganho para o cirurgião</dt><dd>Imagem nítida sem precisar apagar a sala. A equipe inteira enxerga melhor o campo cirúrgico.</dd></dl>
+        <p class="say">“O senhor não precisa mais operar no escuro para ter imagem limpa.”</p>
+      </article>
+      <article class="card">
+        <h3>Foco interno, lente frontal parada</h3>
+        <dl><dt>O que é</dt><dd>Foco por acionamento magnético interno. A lente frontal fica na mesma posição, com inserto de segurança integrado.</dd>
+        <dt>Ganho para o cirurgião</dt><dd>Menor risco de contato com a córnea durante o ajuste de foco. Mais segurança para o paciente.</dd></dl>
+        <p class="say">“Você focaliza sem aproximar nada do olho do paciente.”</p>
+      </article>
+      <article class="card">
+        <h3>Faixa de foco ampla</h3>
+        <dl><dt>O que é</dt><dd>Faixa de foco ampla, com ajuste fino imediato sem tocar no microscópio.</dd>
+        <dt>Ganho para o cirurgião</dt><dd>Imagem nítida durante a troca fluido-ar (FAX), sem interromper o fluxo do caso.</dd></dl>
+        <p class="say">“Na troca fluido-ar, a imagem continua nítida e você não para para refocar o microscópio.”</p>
+      </article>
+      <article class="card">
+        <h3>Componentes híbridos, sem esterilização</h3>
+        <dl><dt>O que é</dt><dd>Módulo de focalização reutilizável. Capa e lente HD descartáveis, que se encaixam prontas para uso.</dd>
+        <dt>Ganho para o cirurgião</dt><dd>Preparo mais rápido, menos dependência da CME e óptica nova em todo caso.</dd></dl>
+        <p class="say">“Abriu a embalagem, encaixou, operou. O próximo paciente não espera a esterilização.”</p>
+      </article>
+      <article class="card">
+        <h3>Integração com o microscópio</h3>
+        <dl><dt>O que é</dt><dd>Integração CAN com fabricantes selecionados e acessórios (inversor, pedal, controle de fonte). Adaptação para 5 fabricantes, f = 175 mm e f = 200 mm.</dd>
+        <dt>Ganho para o cirurgião</dt><dd>O investimento não fica preso a uma marca de microscópio.</dd></dl>
+        <p class="say">“Se amanhã o senhor trocar de microscópio, o BIOM vai junto.”</p>
+      </article>
+      <article class="card">
+        <h3>Contraste para 3D e heads-up</h3>
+        <dl><dt>O que é</dt><dd>Percepção de contraste reforçada, indicada para sistemas 3D e de visualização heads-up.</dd>
+        <dt>Ganho para o cirurgião</dt><dd>Aproveita melhor plataformas digitais que o centro já tem ou vai comprar.</dd></dl>
+        <p class="say">“Se o senhor opera olhando para a tela, o BIOM 6 foi pensado para isso.”</p>
+      </article>
+    </div>
+    <div class="callout">
+      <div class="eyebrow">Credencial de marca</div>
+      <p><strong>40 anos de BIOM.</strong> A OCULUS desenvolveu o primeiro sistema de observação grande angular sem contato em 1985. Use isso contra quem vende “o similar”: o cirurgião está comprando o original na sexta geração.</p>
+    </div>
+  </div>
+</section>
+
+<section id="consumivel">
+  <div class="wrap stack">
+    <div class="head">
+      <div class="eyebrow">O ponto mais sensível da venda</div>
+      <h2>BIOM 5 × BIOM 6: o consumível é argumento, não custo</h2>
+      <p class="muted">O cliente compara a lista do BIOM 5 com a do BIOM 6 e vê 50% de diferença. A conta está incompleta: o BIOM 5 é vendido sem a lente dourada, e o BIOM 6 já vem com 20 cirurgias de lentes. Na comparação justa, a diferença cai para 25%. O descartável é o que elimina a esterilização e garante óptica nova em todo caso.</p>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Critério</th><th>BIOM 5 (ML manual / CL elétrico)</th><th>BIOM 6</th></tr></thead>
+      <tbody>
+        <tr><td>Preço de lista do equipamento</td><td class="num">R$ 134.545 (5ML) · R$ 153.834 (5CL)</td><td class="num">R$ 231.299</td></tr>
+        <tr><td>Lente dourada</td><td class="num">+ R$ 31.019 (vendida à parte)</td><td>Não se aplica</td></tr>
+        <tr class="hl"><td><strong>Total para operar</strong></td><td class="num"><strong>R$ 165.564 (5ML) · R$ 184.853 (5CL)</strong></td><td class="num"><strong>R$ 231.299 (+25% sobre o 5CL completo)</strong></td></tr>
+        <tr><td>Lentes inclusas</td><td>—</td><td>5 caixas Optic Set HD = 20 cirurgias</td></tr>
+        <tr><td>Modelo de uso</td><td>Óptica reutilizável, esterilizada entre cirurgias</td><td>Módulo reutilizável + capa e lente HD descartáveis</td></tr>
+        <tr><td>Preparo entre casos</td><td>Depende do ciclo da CME</td><td>Encaixe imediato, sem esterilização</td></tr>
+        <tr><td>Estado da óptica</td><td>Acumula uso e ciclos de esterilização</td><td>Lente nova em toda cirurgia</td></tr>
+        <tr><td>Foco</td><td>Manual (5ML) ou motorizado (5CL)</td><td>Interno, acionado magneticamente; lente frontal fixa</td></tr>
+        <tr><td>Reflexo da luz da sala</td><td>—</td><td>Design fechado, livre de reflexos</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout">
+      <div class="eyebrow">A comparação justa</div>
+      <div class="lines">
+        <div><span>BIOM 5CL + lente dourada (pronto para operar)</span><span>R$ 184.853</span></div>
+        <div><span>BIOM 6 Starter Kit (lista)</span><span>R$ 231.299</span></div>
+        <div><span>Diferença real</span><span>+25%, não +50%</span></div>
+        <div><span>Já incluso no BIOM 6</span><span>5 caixas Optic Set HD (20 cirurgias)</span></div>
+      </div>
+      <p>Na Opção A, a diferença para o BIOM 5CL completo cai para 17%.</p>
+      <p class="say">“Doutor, para operar com o BIOM 5 o senhor ainda precisa da lente dourada. Comparando completo com completo, a diferença é de 25%, e o BIOM 6 já vem com 20 cirurgias de lentes.”</p>
+    </div>
+    <div class="grid2">
+      <div class="callout">
+        <div class="eyebrow">Custo por cirurgia para o cliente</div>
+        <p>Caixa de Optic Set HD com 4 unidades: <strong>R$ 12.211</strong> na lista, ou seja, <strong>cerca de R$ 3.053 por cirurgia</strong>. No contrato da Opção C, a referência sugerida é R$ 11.448 por caixa (R$ 2.862 por cirurgia).</p>
+        <p class="say">“É um custo por paciente, previsível, que entra no orçamento da cirurgia como material descartável. A esterilização também custa, só que ninguém coloca na conta.”</p>
+        <p class="note">Confirme com o cliente como ele cobra material descartável do convênio ou do particular. Não prometa repasse.</p>
+      </div>
+      <div class="callout strong">
+        <div class="eyebrow">Por que a OCULUS prioriza a Opção C</div>
+        <p>O BIOM 5 é uma venda única. O BIOM 6 com contrato de lentes vira relacionamento de 24 meses.</p>
+        <div class="lines">
+          <div><span>Opção A (equipamento à vista)</span><span>R$ 216.842</span></div>
+          <div><span>Opção C (equipamento + 24 caixas a R$ 11.448)</span><span>R$ 477.138</span></div>
+        </div>
+        <p>Cliente C é visita mensal garantida, abertura para upgrade e dado real de volume cirúrgico.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="concorrencia">
+  <div class="wrap stack">
+    <div class="head">
+      <div class="eyebrow">Posicionamento competitivo</div>
+      <h2>Contra quem você está vendendo</h2>
+      <p class="muted">Não fale mal da concorrência. Faça a pergunta certa e deixe o cirurgião chegar à conclusão. Antes de citar qualquer característica técnica de concorrente, confirme no material oficial dele.</p>
+    </div>
+    <div class="grid3">
+      <article class="card">
+        <div class="eyebrow">Lentes de contato de campo amplo</div>
+        <dl><dt>Onde são fortes</dt><dd>Preço de entrada baixo e hábito antigo do cirurgião.</dd>
+        <dt>Como posicionar o BIOM 6</dt><dd>Sem contato com a córnea, foco sem tocar no microscópio e sem depender de auxiliar para posicionar a lente.</dd>
+        <dt>Pergunta que abre</dt><dd>“Quantas vezes por caso o senhor precisa reposicionar a lente ou pedir ajuda para isso?”</dd></dl>
+      </article>
+      <article class="card">
+        <div class="eyebrow">Sistemas do fabricante do microscópio</div>
+        <dl><dt>Exemplos</dt><dd>Zeiss RESIGHT, Haag-Streit EIBOS 2, Leica RUV800.</dd>
+        <dt>Onde são fortes</dt><dd>Integração nativa com o próprio microscópio.</dd>
+        <dt>Como posicionar o BIOM 6</dt><dd>Multimarcas: um único sistema para centros com microscópios de fabricantes diferentes ou que pretendem trocar. Óptica fechada, foco interno e o legado do sistema original.</dd>
+        <dt>Pergunta que abre</dt><dd>“Todas as suas salas têm o mesmo microscópio? E se trocar daqui a 3 anos?”</dd></dl>
+      </article>
+      <article class="card">
+        <div class="eyebrow">Ficar no BIOM 5 ou comprar usado</div>
+        <dl><dt>Onde é forte</dt><dd>Já está pago e funciona.</dd>
+        <dt>Como posicionar o BIOM 6</dt><dd>Opção B (upgrade com troca) reduz o investimento para R$ 202.386. O ganho é tempo de sala, segurança no foco e imagem sem reflexo.</dd>
+        <dt>Pergunta que abre</dt><dd>“Quanto tempo a sala fica parada esperando a esterilização do BIOM entre um caso e outro?”</dd></dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="inversor">
+  <div class="wrap stack">
+    <div class="head">
+      <div class="eyebrow">Qualificação técnica</div>
+      <h2>Microscópio e inversor: precisa de SDI ou não?</h2>
+      <p class="muted">Regra do folheto oficial: se o microscópio do cliente tem <strong>inversor integrado</strong>, o BIOM 6 conecta direto pelo controlador magnético e <strong>não precisa comprar inversor</strong>. Se não tem, ofereça o <strong>combo com OCULUS SDI 4c</strong>.</p>
+    </div>
+    <div class="flow">
+      <div class="step"><b class="n">PASSO 1</b><h3>Qual o microscópio?</h3><p>Marca, modelo e distância de trabalho (f = 175 mm ou f = 200 mm). O kit é específico para cada combinação.</p></div>
+      <div class="step"><b class="n">PASSO 2</b><h3>Está na lista de compatíveis?</h3><p>Confira a tabela abaixo. Fora da lista, consulte a gerência antes de cotar.</p></div>
+      <div class="step"><b class="n">PASSO 3</b><h3>Tem inversor integrado?</h3><p>Pergunte ao cliente e confirme na configuração do microscópio (nota fiscal, manual ou técnico do fabricante). Se ele já tem SDI 4c ou 4cli da OCULUS, aproveita o que tem.</p></div>
+    </div>
+    <div class="branch">
+      <div class="card">
+        <div class="eyebrow">Com inversor integrado</div>
+        <h3>Só BIOM 6. Sem inversor.</h3>
+        <p>Conecta pelo controlador magnético certo para a marca:</p>
+        <ul class="check"><li><strong>Controlador TL:</strong> Alcon e Haag-Streit</li><li><strong>Controlador PR:</strong> Leica, Bausch+Lomb e Zeiss</li></ul>
+        <p class="say">“Seu microscópio já faz a inversão. O investimento é só no BIOM 6.”</p>
+      </div>
+      <div class="card alt">
+        <div class="eyebrow">Sem inversor integrado</div>
+        <h3>Combo BIOM 6 + SDI 4c</h3>
+        <p>O SDI 4c (elétrico, com cabo) faz a inversão da imagem. Há versão Leica e versão Zeiss/Haag-Streit/Topcon. Venda em combo, com preço fechado: ver “Propostas e combos”.</p>
+        <p class="say">“Resolvemos tudo em uma compra: o BIOM 6 e o inversor, com um preço de combo que não sai na compra separada.”</p>
+      </div>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Fabricante</th><th>Modelos com adaptação para BIOM 6</th><th>Controlador</th><th>Starter Kit na tabela 2026</th></tr></thead>
+      <tbody>
+        <tr><td>Alcon</td><td>LuxOR® Revalia™</td><td>TL</td><td>Alcon/LuxOR/Revalia F175 e F200</td></tr>
+        <tr><td>Haag-Streit</td><td>METIS 900, HI-R NEO 900</td><td>TL</td><td>Haag-Streit F175 e F200</td></tr>
+        <tr><td>Leica</td><td>Proveo 8x, Proveo 8, M844, M822</td><td>PR</td><td>Leica F175 e F200</td></tr>
+        <tr><td>Zeiss</td><td>ARTEVO® 750, 800, 850; Lumera® 700, Lumera® T, Lumera® i</td><td>PR</td><td>Zeiss Lumera/Artevo F175 e F200</td></tr>
+        <tr><td>Bausch+Lomb</td><td>SeeLuma™</td><td>PR</td><td><span class="pill warn">Sem SKU na tabela: consultar</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">O folheto lista os modelos compatíveis, mas não informa quais saem de fábrica com inversor integrado. Isso depende da configuração comprada pelo cliente. Confirme caso a caso antes de fechar sem SDI.</p>
+  </div>
+</section>
+
+<section id="propostas">
+  <div class="wrap stack">
+    <div class="head">
+      <div class="eyebrow">Condições comerciais</div>
+      <h2>Quatro portas de entrada, um piso de preço</h2>
+      <p class="muted">Todas as opções incluem o Starter Kit com 5 caixas de Optic Set HD (20 cirurgias). Nenhum preço abaixo de R$ 202.386 para o BIOM 6 sozinho.</p>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Opção</th><th class="num">Preço ao cliente</th><th>Condição</th><th>Para quem</th><th>Caixa de brinde</th></tr></thead>
+      <tbody>
+        <tr><td>Lista</td><td class="num">R$ 231.299</td><td>—</td><td>Referência e âncora de preço</td><td><span class="pill ok">Pode oferecer</span></td></tr>
+        <tr class="hl"><td><strong>A · Lançamento</strong></td><td class="num">R$ 216.842</td><td>Pedido até 15/11; cota de 10 unidades</td><td>Quem decide no evento</td><td><span class="pill ok">Pode oferecer</span></td></tr>
+        <tr><td><strong>B · Upgrade BIOM 5 → 6</strong></td><td class="num">R$ 202.386</td><td>Troca de um BIOM 5 funcionando</td><td>Base instalada de BIOM 5</td><td><span class="pill no">Não</span></td></tr>
+        <tr class="hl"><td><strong>C · BIOM 6 + consumíveis</strong></td><td class="num">R$ 202.386</td><td>Contrato de 24 caixas de lentes em 24 meses</td><td>Alto volume (4 ou mais cirurgias/mês)</td><td><span class="pill no">Não</span></td></tr>
+        <tr><td><strong>D · Lista em 10× sem juros</strong></td><td class="num">10× R$ 23.130</td><td>Via Santander</td><td>Quem precisa de fluxo de caixa</td><td><span class="pill warn">Só com aprovação</span></td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="split">
+      <div class="callout">
+        <div class="eyebrow">Regra da caixa de lentes de brinde</div>
+        <p>Uma caixa de Optic Set HD (4 cirurgias, R$ 12.211 na lista) é a sua <strong>ferramenta de fechamento</strong>, não um desconto automático.</p>
+        <ul class="check">
+          <li>Use na <strong>Opção A</strong> para fechar no evento: “Fechando até 15/11, o senhor leva o kit com 20 cirurgias e mais uma caixa: são 24 casos sem custo de lente.”</li>
+          <li>Pode usar sobre o preço de lista e no Combo Lançamento (A) com inversor.</li>
+          <li><strong>Nunca</strong> na Opção B (trade-in) nem na Opção C (contrato de lentes), com ou sem inversor.</li>
+          <li>Opção D (financiamento), com ou sem inversor: só com aprovação da gerência.</li>
+        </ul>
+        <p class="note">Ofereça a caixa em troca de algo: decisão no prazo, pedido assinado ou indicação de outro cirurgião. Nunca dê de saída.</p>
+      </div>
+      <div class="callout">
+        <div class="eyebrow">Como apresentar</div>
+        <ul class="check">
+          <li>Mostre a lista primeiro. Ela ancora o valor.</li>
+          <li>Apresente no máximo duas opções, escolhidas pelo perfil do cliente.</li>
+          <li>Tem BIOM 5? Comece pela B.</li>
+          <li>Opera 4 ou mais casos por mês? Comece pela C.</li>
+          <li>Decide no evento? A + caixa de brinde.</li>
+          <li>Trava no caixa? D.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Combos com inversor SDI 4c (para microscópio sem inversor integrado)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Combo BIOM 6 + SDI 4c</th><th class="num">Compra separada</th><th class="num">Preço do combo</th><th>Condição</th><th>Caixa de brinde</th></tr></thead>
+      <tbody>
+        <tr><td>Lista</td><td class="num">R$ 359.714</td><td class="num">R$ 359.714</td><td>—</td><td><span class="pill ok">Pode oferecer</span></td></tr>
+        <tr class="hl"><td><strong>Combo Lançamento (A)</strong></td><td class="num">R$ 359.714</td><td class="num"><strong>R$ 337.231</strong></td><td>Pedido até 15/11. Economia de R$ 22.483</td><td><span class="pill ok">Pode oferecer</span></td></tr>
+        <tr><td>Combo Upgrade (B) ou Consumíveis (C)</td><td class="num">R$ 359.714</td><td class="num">R$ 314.749</td><td>Mesma contrapartida da B ou da C</td><td><span class="pill no">Não</span></td></tr>
+        <tr><td>Combo Parcelado (D)</td><td class="num">R$ 359.714</td><td class="num">10× R$ 35.971</td><td>Santander, sem juros</td><td><span class="pill warn">Só com aprovação</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">SDI 4c isolado: R$ 128.415 na lista. Combo D considera a mesma taxa Santander da Opção D; confirme a taxa antes de oferecer. O cliente de upgrade (B) normalmente já tem inversor do BIOM 5: verifique se é SDI 4c/4cli antes de incluir um novo.</p>
+  </div>
+</section>
+
+<section id="simulador">
+  <div class="wrap stack">
+    <div class="head">
+      <div class="eyebrow">Ferramenta</div>
+      <h2>Monte a proposta</h2>
+      <p class="muted">Escolha a opção, o microscópio e os adicionais. O resumo sai pronto para copiar no WhatsApp ou no e-mail.</p>
+    </div>
+    <form class="sim" id="sim" onsubmit="return false">
+      <div class="in">
+        <fieldset>
+          <legend>Opção comercial</legend>
+          <div class="opts">
+            <label><input type="radio" name="opt" id="opt-L" value="L"><span>Lista</span></label>
+            <label><input type="radio" name="opt" id="opt-A" value="A" checked><span>A · Lançamento</span></label>
+            <label><input type="radio" name="opt" id="opt-B" value="B"><span>B · Upgrade</span></label>
+            <label><input type="radio" name="opt" id="opt-C" value="C"><span>C · Consumíveis</span></label>
+            <label><input type="radio" name="opt" id="opt-D" value="D"><span>D · 10× sem juros</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Microscópio do cliente</legend>
+          <select id="mic" aria-label="Microscópio">
+            <option value="Zeiss Lumera/Artevo">Zeiss (ARTEVO / Lumera)</option>
+            <option value="Leica">Leica (Proveo / M844 / M822)</option>
+            <option value="Alcon/LuxOR/Revalia">Alcon (LuxOR Revalia)</option>
+            <option value="Haag-Streit">Haag-Streit (METIS 900 / HI-R NEO 900)</option>
+            <option value="Bausch+Lomb SeeLuma">Bausch+Lomb (SeeLuma)</option>
+          </select>
+          <div class="opts" role="radiogroup" aria-label="Distância de trabalho">
+            <label><input type="radio" name="f" id="f175" value="F175" checked><span>f = 175 mm</span></label>
+            <label><input type="radio" name="f" id="f200" value="F200"><span>f = 200 mm</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Adicionais</legend>
+          <label class="chk"><input type="checkbox" id="sdi"><span><strong>Microscópio sem inversor integrado</strong><br><span class="muted">Inclui SDI 4c no combo</span></span></label>
+          <label class="chk"><input type="checkbox" id="gift"><span><strong>Caixa de Optic Set HD de brinde</strong><br><span class="muted" id="gift-hint">+4 cirurgias</span></span></label>
+        </fieldset>
+      </div>
+      <div class="out" aria-live="polite">
+        <div class="eyebrow" id="o-title">Opção A · Lançamento</div>
+        <div class="bigprice" id="o-price">R$ 216.842</div>
+        <div id="o-status"></div>
+        <div class="lines" id="o-lines"></div>
+        <label for="o-text" class="muted" style="font-size:.85rem">Resumo para enviar ao cliente</label>
+        <textarea id="o-text" readonly></textarea>
+        <button type="button" id="copy">Copiar resumo</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="objecoes">
+  <div class="wrap stack">
+    <div class="head">
+      <div class="eyebrow">Respostas prontas</div>
+      <h2>Objeções mais prováveis</h2>
+    </div>
+    <div>
+      <details open><summary>“Está 50% mais caro que o BIOM 5.”</summary><div class="body">
+        <p>Corrija a comparação antes de discutir valor. O BIOM 5 de lista não inclui a lente dourada (R$ 31.019). Completo, o 5CL vai a R$ 184.853: a diferença real é de 25%, e o BIOM 6 já traz 20 cirurgias de lentes.</p>
+        <p class="say">“Doutor, nessa conta o BIOM 5 está sem a lente dourada. Completo com completo, a diferença é de 25%, e o BIOM 6 já vem com 20 cirurgias de lentes. E se o senhor já tem um BIOM 5, a troca reduz o investimento para R$ 202.386.”</p></div></details>
+      <details><summary>“Não quero ter custo recorrente com lente.”</summary><div class="body">
+        <p>Mostre o custo por cirurgia (cerca de R$ 2.862 a R$ 3.053) e o que ele substitui: ciclo de CME, tempo de sala parada e desgaste da óptica. Lembre que as primeiras 20 cirurgias já vêm no kit.</p>
+        <p class="say">“As primeiras 20 cirurgias estão incluídas. Depois, é um custo por paciente que entra no orçamento do procedimento.”</p></div></details>
+      <details><summary>“Meu microscópio já tem sistema próprio de grande angular.”</summary><div class="body">
+        <p>Não ataque o sistema dele. Pergunte sobre as outras salas e sobre a troca futura de microscópio. O argumento é independência de marca e o sistema original.</p>
+        <p class="say">“O BIOM 6 funciona em cinco fabricantes. Se o centro tiver ou vier a ter outra marca, o mesmo sistema atende todas as salas.”</p></div></details>
+      <details><summary>“Uso lente de contato e funciona bem.”</summary><div class="body">
+        <p>Explore o desconforto: reposicionamento, dependência de auxiliar e contato com a córnea. Ofereça demonstração.</p>
+        <p class="say">“Que tal operar um caso com o BIOM 6 e comparar na sua própria rotina?”</p></div></details>
+      <details><summary>“Meu microscópio não tem inversor.”</summary><div class="body">
+        <p>Isso é oportunidade. Ofereça o Combo Lançamento com SDI 4c por R$ 337.231, R$ 22.483 abaixo da compra separada.</p>
+        <p class="say">“Resolvemos as duas coisas de uma vez, com preço de combo que só vale até 15/11.”</p></div></details>
+      <details><summary>“Vou pensar e decido depois do evento.”</summary><div class="body">
+        <p>Use a escassez real: cota de 10 unidades e prazo de 15/11. A caixa de brinde só entra para quem fecha no prazo.</p>
+        <p class="say">“O preço de lançamento vale para 10 unidades até 15/11. Posso reservar a sua hoje?”</p></div></details>
+      <details><summary>“Preciso de desconto maior.”</summary><div class="body">
+        <p>Não baixe preço. Troque condição: upgrade (B), contrato de lentes (C) ou parcelamento (D). Abaixo de R$ 202.386 não há alçada comercial.</p>
+        <p class="say">“O menor preço que consigo é com contrapartida. Qual delas faz mais sentido para o senhor: troca do BIOM 5 ou contrato de lentes?”</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section id="fechamento">
+  <div class="wrap stack">
+    <div class="head">
+      <div class="eyebrow">Sequência de fechamento</div>
+      <h2>Do primeiro contato ao pedido</h2>
+    </div>
+    <div class="split">
+      <ol class="steps">
+        <li><div><strong>Qualifique o microscópio.</strong> Marca, modelo, f = 175 ou 200 mm, inversor integrado ou não.</div></li>
+        <li><div><strong>Qualifique o volume.</strong> Quantas vitrectomias por mês? Tem BIOM 5? Isso define a opção a apresentar.</div></li>
+        <li><div><strong>Apresente o problema antes do produto.</strong> Reflexo, risco no foco, tempo de esterilização.</div></li>
+        <li><div><strong>Ancore na lista e apresente até duas opções.</strong> Use o simulador para montar a proposta na hora.</div></li>
+        <li><div><strong>Use a caixa de brinde só para fechar.</strong> Em troca do pedido até 15/11.</div></li>
+        <li><div><strong>Registre no CRM no mesmo dia.</strong> Opção oferecida, microscópio, volume e próximo passo com data.</div></li>
+      </ol>
+      <div class="callout">
+        <div class="eyebrow">Checklist antes de enviar a proposta</div>
+        <ul class="check">
+          <li>Marca, modelo e distância de trabalho confirmados</li>
+          <li>Inversor integrado confirmado (ou SDI incluído)</li>
+          <li>Opção e condição corretas (prazo, troca ou contrato)</li>
+          <li>Brinde só onde a regra permite</li>
+          <li>Para B: BIOM 5 do cliente funcionando e número de série anotado</li>
+          <li>Para C: volume mensal compatível com 1 caixa por mês</li>
+          <li>Para D: cadastro do cliente encaminhado ao Santander</li>
+          <li>Bausch+Lomb: SKU confirmado com a gerência</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Fontes:</strong> Folheto OCULUS BIOM® 6 (tradução PT, 03/26); Tabela de Preços 2026 OCULUS Brasil; proposta de lançamento Pan-Retina.</p>
+    <p><strong>Itens que dependem de confirmação:</strong> modelos que saem com inversor integrado (varia por configuração); SKU do Starter Kit para Bausch+Lomb SeeLuma; preço da caixa no contrato da Opção C (referência sugerida R$ 11.448); taxa Santander aplicada ao combo parcelado.</p>
+    <p>Documento interno. Não encaminhe esta página ao cliente; use o resumo do simulador.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var fmt=function(v){return "R$ "+v.toLocaleString("pt-BR",{maximumFractionDigits:0})};
+  var BOX_LIST=12211, BOX_C=11448;
+  var D={
+    L:{name:"Preço de lista",solo:231299,combo:359714,cond:"Preço de referência.",gift:{solo:"ok",combo:"ok"}},
+    A:{name:"Opção A · Lançamento",solo:216842,combo:337231,cond:"Pedido até 15/11/2026, cota de 10 unidades.",gift:{solo:"ok",combo:"ok"}},
+    B:{name:"Opção B · Upgrade BIOM 5 → 6",solo:202386,combo:314749,cond:"Troca de um BIOM 5 em funcionamento.",gift:{solo:"no",combo:"no"}},
+    C:{name:"Opção C · BIOM 6 + consumíveis",solo:202386,combo:314749,cond:"Contrato de 24 caixas de Optic Set HD em 24 meses (1 caixa por mês).",gift:{solo:"no",combo:"no"}},
+    D:{name:"Opção D · 10× sem juros",solo:231299,combo:359714,cond:"Parcelamento em 10× sem juros via Santander.",gift:{solo:"warn",combo:"warn"}}
+  };
+  var $=function(id){return document.getElementById(id)};
+  function val(name){var e=document.querySelector('input[name="'+name+'"]:checked');return e?e.value:null}
+  function render(){
+    var o=val("opt"), f=val("f"), mic=$("mic").value, sdi=$("sdi").checked;
+    var d=D[o], total=sdi?d.combo:d.solo, gs=d.gift[sdi?"combo":"solo"];
+    var gEl=$("gift"); gEl.disabled=(gs==="no"); if(gs==="no") gEl.checked=false;
+    $("gift-hint").textContent= gs==="no" ? "Não disponível em trade-in (B) nem em contrato (C)" : gs==="warn" ? "Financiamento: só com aprovação da gerência" : "+4 cirurgias";
+    var gift=gEl.checked;
+    $("o-title").textContent=d.name+(sdi?" · combo com SDI 4c":"");
+    $("o-price").textContent=o==="D"?"10× "+fmt(Math.round(total/10)):fmt(total);
+    var st="";
+    if(gift){
+      if(gs==="ok") st='<span class="pill ok">Brinde dentro da regra</span>';
+      else if(gs==="warn") st='<span class="pill warn">Brinde só com aprovação da gerência</span>';
+      else st='<span class="pill no">Brinde não permitido: esta opção já está no piso</span>';
+    } else st='<span class="pill ok">Condição dentro da alçada</span>';
+    if(mic.indexOf("Bausch")===0) st+=' <span class="pill warn">B+L: confirmar SKU</span>';
+    if(sdi && o==="D") st+=' <span class="pill warn">Confirmar taxa Santander do combo</span>';
+    if(sdi && o==="B") st+=' <span class="pill warn">Cliente de upgrade: confirmar se já tem SDI</span>';
+    $("o-status").innerHTML=st;
+    var L=[];
+    var full=(gs==="ok");
+    L.push([full?"BIOM 6 Starter Kit "+mic+" "+f+" (inclui 5 caixas Optic Set HD = 20 cirurgias)":"BIOM 6 · "+mic+" "+f, sdi?"":fmt(d.solo)]);
+    if(sdi) L.push(["+ OCULUS SDI 4c elétrico com cabo"+(mic==="Leica"?" (versão Leica)":""),""]);
+    if(sdi) L.push(["Preço do combo", fmt(d.combo)]);
+    if(sdi && o!=="L" && o!=="D") L.push(["Economia vs. compra separada", fmt(359714-d.combo)]);
+    if(gift && gs==="ok") L.push(["+ 1 caixa Optic Set HD de brinde (4 cirurgias)","R$ 0"]);
+    if(gift && gs==="warn") L.push(["Caixa de brinde: pendente de aprovação da gerência (fora do resumo)","—"]);
+    if(o==="D") L.push(["Total parcelado", fmt(total)]);
+    if(o==="C") L.push(["Contrato de lentes: 24 caixas × "+fmt(BOX_C)+" (ref.)", fmt(24*BOX_C)]);
+    $("o-lines").innerHTML=L.map(function(r){return "<div><span>"+r[0]+"</span><span>"+r[1]+"</span></div>"}).join("");
+    var cir=20+((gift&&gs==="ok")?4:0);
+    var t="Proposta OCULUS · BIOM® 6\n"+d.name+"\n\n";
+    t+=full?"• BIOM 6 Starter Kit para "+mic+" "+f+", com 5 caixas de Optic Set HD\n":"• BIOM 6 · "+mic+" "+f+"\n";
+    if(sdi) t+="• Inversor OCULUS SDI 4c elétrico com cabo\n";
+    if(gift&&gs==="ok") t+="• 1 caixa adicional de Optic Set HD como cortesia\n";
+    t+=full?"\nCirurgias com lente inclusa: "+cir+"\n":"\n";
+    t+=(o==="D"?"Investimento: 10× "+fmt(Math.round(total/10))+" sem juros (total "+fmt(total)+")":"Investimento: "+fmt(total))+"\n";
+    t+="Condição: "+d.cond+"\n";
+    if(o==="C") t+="Lentes no contrato: 24 caixas, 1 por mês.\n";
+    t+="\nDiferenciais: imagem livre de reflexos, foco interno sem mover a lente frontal, faixa de foco ampla para a troca fluido-ar e preparo sem esterilização.";
+    $("o-text").value=t;
+  }
+  document.getElementById("sim").addEventListener("change",render);
+  $("copy").addEventListener("click",function(){
+    var ta=$("o-text"), b=this;
+    function done(){b.textContent="Copiado";setTimeout(function(){b.textContent="Copiar resumo"},1800)}
+    try{navigator.clipboard.writeText(ta.value).then(done,function(){ta.focus();ta.select()})}catch(e){ta.focus();ta.select()}
+  });
+  render();
+})();
+</script>
+
+<div id="offline-bar" hidden role="status">Sem internet: você está usando a versão salva no aparelho.</div>
+
+<script>
+if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}
+(function(){var b=document.getElementById("offline-bar");function u(){b.hidden=navigator.onLine;document.body.classList.toggle("is-offline",!navigator.onLine)}window.addEventListener("online",u);window.addEventListener("offline",u);u()})();
+</script>
+</body>
+</html>

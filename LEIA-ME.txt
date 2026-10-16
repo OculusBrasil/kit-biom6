@@ -1,0 +1,30 @@
+KIT BIOM 6 — APLICATIVO OFFLINE (PWA)
+
+O que tem na pasta
+- index.html ............ o aplicativo (conteúdo + simulador)
+- sw.js ................. faz o app funcionar sem internet
+- manifest.webmanifest .. nome, ícone e cor do app instalado
+- fonts/ e icons/ ....... fontes e ícones locais (nada depende de internet)
+
+PUBLICAR (uma vez)
+1. Crie um repositório na conta OculusBrasil do GitHub (ex.: kit-biom6).
+2. Envie todos os arquivos desta pasta para a raiz do repositório.
+3. Settings > Pages > Source: branch "main", pasta "/ (root)". Salve.
+4. Em 1 a 2 minutos o link fica ativo: https://<conta>.github.io/kit-biom6/
+   O link precisa ser HTTPS para o modo offline funcionar.
+
+INSTALAR NO CELULAR DO CONSULTOR (com internet, só na primeira vez)
+- iPhone: abrir o link no Safari > Compartilhar > "Adicionar à Tela de Início".
+- Android: abrir no Chrome > menu ⋮ > "Instalar app" (ou "Adicionar à tela inicial").
+- Depois de aberto uma vez, funciona em modo avião.
+
+ATUALIZAR PREÇOS OU CONTEÚDO
+1. Edite o index.html e envie para o repositório.
+2. No sw.js, troque a linha VERSION (ex.: v1 > v2) e envie também.
+3. O celular baixa a versão nova na próxima vez que o app abrir com internet.
+   Sem internet, continua mostrando a última versão salva.
+
+ATENÇÃO
+GitHub Pages é público: quem tiver o link consegue abrir. O app não mostra custos
+nem margens, mas mostra a regra de alçada (menor preço R$ 202.386). Compartilhe o
+link só com a equipe. A página tem "noindex" para não aparecer no Google.
